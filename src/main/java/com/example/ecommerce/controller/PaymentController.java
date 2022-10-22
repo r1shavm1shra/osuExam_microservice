@@ -5,7 +5,9 @@ import com.example.ecommerce.Repo.PaymentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin
@@ -27,10 +29,12 @@ public class PaymentController {
     }
 
     @PostMapping("/savePayment")
-    public String saveUser(@RequestBody PaymentDetails paymentDetails)
+    public Map<String, String> saveUser(@RequestBody PaymentDetails paymentDetails)
     {
-        paymentRepo.save(paymentDetails);
-        return "Saved...";
+        paymentDetails = paymentRepo.saveAndFlush(paymentDetails);
+        Map<String,String> response = new HashMap<>();
+        response.put("id",""+paymentDetails.getId());
+        return response;
     }
 
 }

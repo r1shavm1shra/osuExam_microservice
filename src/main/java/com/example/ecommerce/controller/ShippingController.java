@@ -1,11 +1,14 @@
 package com.example.ecommerce.controller;
 
+import com.example.ecommerce.Model.PaymentDetails;
 import com.example.ecommerce.Model.ShippingDetails;
 import com.example.ecommerce.Repo.ShippingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin
@@ -28,10 +31,11 @@ public class ShippingController {
     }
 
     @PostMapping("/saveShipping")
-    public String saveUser(@RequestBody ShippingDetails shippingDetails)
+    public Map<String, String> saveUser(@RequestBody ShippingDetails shippingDetails)
     {
-        shippingRepo.save(shippingDetails);
-        return "Saved...";
+        shippingDetails = shippingRepo.saveAndFlush(shippingDetails);
+        Map<String,String> response = new HashMap<>();
+        response.put("id",""+shippingDetails.getId());
+        return response;
     }
-
 }

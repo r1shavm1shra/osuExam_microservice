@@ -1,10 +1,10 @@
-package com.example.ecommerce;
+package com.osuexam.microservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EcommerceApplicationTests {
+class OSUExamApplicationTests {
 
 	@Test
 	void contextLoads() {

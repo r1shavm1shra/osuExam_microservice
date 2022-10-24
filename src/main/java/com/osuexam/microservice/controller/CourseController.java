@@ -1,0 +1,46 @@
+package com.osuexam.microservice.controller;
+
+import com.osuexam.microservice.Model.Course;
+import com.osuexam.microservice.Model.Exam;
+import com.osuexam.microservice.Model.Seat;
+import com.osuexam.microservice.Model.StudentResponse;
+import com.osuexam.microservice.Repo.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+@CrossOrigin
+@RestController
+public class CourseController {
+
+    @Autowired
+    private CourseRepo courseRepo;
+
+    @PostMapping("/createCourse")
+    public Map<String, String> createExam(@RequestBody Course course)
+    {
+        Map<String, String> response = new HashMap<>();
+        course = courseRepo.saveAndFlush(course);
+        response.put("Message","Successfully saved");
+        response.put("CourseId",""+course.getId());
+        return response;
+    }
+
+    @GetMapping("/course/{id}")
+    public Optional<Course> getById(@PathVariable long id)
+    {
+        return courseRepo.findById(id);
+    }
+
+    @GetMapping("/course")
+    public List<Course> getAll()
+    {
+        return courseRepo.findAll();
+    }
+
+}
+

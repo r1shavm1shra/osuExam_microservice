@@ -1,4 +1,4 @@
-package com.example.ecommerce.Model;
+package com.osuexam.microservice.Model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +16,9 @@ public class Login {
 
     @Column
     private String password;
+
+    @Column
+    private Boolean isInstructor;
 
 }
 

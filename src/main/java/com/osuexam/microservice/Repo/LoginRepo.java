@@ -1,7 +1,6 @@
-package com.example.ecommerce.Repo;
+package com.osuexam.microservice.Repo;
 
-import com.example.ecommerce.Model.Login;
-import com.example.ecommerce.Model.User;
+import com.osuexam.microservice.Model.Login;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LoginRepo extends JpaRepository<Login, String> {

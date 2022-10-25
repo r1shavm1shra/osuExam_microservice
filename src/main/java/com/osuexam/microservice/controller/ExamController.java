@@ -58,5 +58,12 @@ public class ExamController {
         return examRepo.findAllStudentResponseForExam(id);
     }
 
+    @GetMapping("/getNearByStudentResponseForExam/examId={examId}&studentIds={studentIds}")
+    public List<ExamDTO> getNearByStudentResponseForExam(@PathVariable long examId, @PathVariable String studentIds)
+    {
+        List<String> studentIdList = Arrays.asList(studentIds.split(","));
+        return examRepo.findNearByStudentResponseForExam(examId,studentIdList);
+    }
+
 }
 

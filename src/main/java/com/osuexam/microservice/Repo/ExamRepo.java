@@ -27,8 +27,7 @@ public interface ExamRepo extends JpaRepository<Exam, Long> {
                     "inner join rooms r on e.rooms_key_id_fk = r.id " +
                     "inner join seat s on s.rooms_id_fk = r.id " +
                     "inner join student_Response sr on sr.seat_id_fk = s.id and sr.answer_key_id_fk = a.question_id " +
-                    "where e.id=:examId and s.student_id_fk IN (:studentIds)",
+                    "where r.id = :roomId and a.question_id = :questionId and s.id IN(:seatId,:seatId+1,:seatId-1, :seatId+r.row_capacity, :seatId+r.row_capacity-1, :seatId+r.row_capacity+1,:seatId-r.row_capacity, :seatId-r.row_capacity-1, :seatId-r.row_capacity+1)",
             nativeQuery = true)
-    List<ExamDTO> findNearByStudentResponseForExam(@Param("examId") Long examId,@Param("studentIds") List<String> studentIds);
-
+    List<ExamDTO> findNearByStudentResponseForExam(@Param("seatId") Long seatId, @Param("roomId") Long roomId, @Param("questionId") Long questionId);
 }

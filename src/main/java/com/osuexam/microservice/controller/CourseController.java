@@ -30,13 +30,13 @@ public class CourseController {
         return response;
     }
 
-    @GetMapping("/course/{id}")
+    @GetMapping("/getCourseById/{id}")
     public Optional<Course> getById(@PathVariable long id)
     {
         return courseRepo.findById(id);
     }
 
-    @GetMapping("/course")
+    @GetMapping("/getAllCourses")
     public List<Course> getAll()
     {
         return courseRepo.findAll();

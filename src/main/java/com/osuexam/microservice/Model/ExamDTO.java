@@ -14,6 +14,5 @@ public interface ExamDTO {
     Long getQuestionId();
     Long getIsCorrect();
 
-
 }
 

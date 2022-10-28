@@ -26,7 +26,7 @@ public class ExamController {
     @Autowired
     private StudentResponseRepo studentResponseRepo;
 
-    @PostMapping("/createExam")
+    @PostMapping("/createExamAndAllocateRoom")
     public Map<String, String> createExam(@RequestBody Exam exam)
     {
         Map<String, String> response = new HashMap<>();
@@ -46,23 +46,22 @@ public class ExamController {
         return response;
     }
 
-    @GetMapping("/exam/{id}")
+    @GetMapping("/getExamById/{id}")
     public Optional<Exam> getById(@PathVariable long id)
     {
         return examRepo.findById(id);
     }
 
-    @GetMapping("/getStudentResponseByExamId/{id}")
+    @GetMapping("/getAllStudentResponseForExam/{id}")
     public List<ExamDTO> getStudentResponseByExamId(@PathVariable long id)
     {
         return examRepo.findAllStudentResponseForExam(id);
     }
 
-    @GetMapping("/getNearByStudentResponseForExam/examId={examId}&studentIds={studentIds}")
-    public List<ExamDTO> getNearByStudentResponseForExam(@PathVariable long examId, @PathVariable String studentIds)
+    @GetMapping("/getNearByStudentResponseForExam/{roomId}/{seatId}/{questionId}")
+    public List<ExamDTO> getNearByStudentResponseForExam(@PathVariable long roomId, @PathVariable long seatId, @PathVariable long questionId)
     {
-        List<String> studentIdList = Arrays.asList(studentIds.split(","));
-        return examRepo.findNearByStudentResponseForExam(examId,studentIdList);
+        return examRepo.findNearByStudentResponseForExam(seatId, roomId, questionId);
     }
 
 }

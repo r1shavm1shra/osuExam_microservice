@@ -20,7 +20,7 @@ public class StudentController {
     @Autowired
     private StudentRepo studentRepo;
 
-    @PostMapping("/createStudent")
+    @PostMapping("/createStudentAndAssignCourses")
     public Map<String, String> createStudent(@RequestBody Student student)
     {
         Map<String, String> response = new HashMap<>();
@@ -29,7 +29,7 @@ public class StudentController {
         return response;
     }
 
-    @GetMapping("/student")
+    @GetMapping("/getAllStudents")
     public List<Student> getStudent()
     {
         return studentRepo.findAll();

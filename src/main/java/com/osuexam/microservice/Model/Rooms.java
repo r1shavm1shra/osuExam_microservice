@@ -20,7 +20,10 @@ public class Rooms {
     private Long rowCapacity;
 
     @Column
-    private Long colCapacity;
+    private Long totalCapacity;
+
+    @Column
+    private Long offset;
 
     @JsonManagedReference(value="rooms")
     @OneToMany(mappedBy="rooms",  targetEntity = Seat.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)

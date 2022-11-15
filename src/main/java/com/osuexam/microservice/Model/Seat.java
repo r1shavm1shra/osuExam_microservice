@@ -3,11 +3,13 @@ package com.osuexam.microservice.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
+@NoArgsConstructor
 @Getter @Setter
 @Entity
 public class Seat {
@@ -30,5 +32,10 @@ public class Seat {
     @JsonManagedReference(value="seats")
     @OneToMany(mappedBy="seats",  targetEntity = StudentResponse.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<StudentResponse> studentResponseList;
+
+    public Seat(Rooms rooms, Student student) {
+        this.rooms = rooms;
+        this.student = student;
+    }
 }
 

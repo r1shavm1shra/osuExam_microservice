@@ -13,6 +13,8 @@ public class ExamController {
 
     @Autowired
     private ExamRepo examRepo;
+    @Autowired
+    private StudentRepo studentRepo;
 
     @Autowired
     private AnswerKeyRepo answerKeyRepo;
@@ -32,8 +34,17 @@ public class ExamController {
         Map<String, String> response = new HashMap<>();
         exam.setAnswerKey(answerKeyRepo.saveAllAndFlush(exam.getAnswerKey()));
         exam.setRooms(roomsRepo.saveAndFlush(exam.getRooms()));
-        examRepo.saveAndFlush(exam);
+        exam = examRepo.saveAndFlush(exam);
+
+        List<String> studentIds = studentRepo.findAllStudentIdByCourseId(exam.getCourse().getId());
+        List<Seat> seatList = new ArrayList<>();
+        for(String studentId: studentIds)
+            seatList.add(new Seat(exam.getRooms(),new Student(studentId)));
+
+        seatRepo.saveAllAndFlush(seatList);
         response.put("Message","Successfully saved");
+        response.put("ExamId",""+exam.getId());
+        response.put("RoomId",""+exam.getRooms().getId());
         return response;
     }
 

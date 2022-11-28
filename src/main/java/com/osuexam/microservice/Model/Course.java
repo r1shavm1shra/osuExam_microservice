@@ -20,7 +20,7 @@ public class Course {
     private String courseName;
 
     @JsonManagedReference(value="course")
-    @OneToMany(mappedBy="course",  targetEntity = Exam.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    List<Exam> exam;
+    @OneToOne(mappedBy="course",  targetEntity = Exam.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    Exam exam;
 }
 

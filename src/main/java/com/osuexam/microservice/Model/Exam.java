@@ -24,7 +24,7 @@ public class Exam {
     @Column(columnDefinition = "json")
     private ExamPaper examPaperJSON;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinColumn(name = "answer_key_id_fk")
     List<AnswerKey> answerKey;
 
@@ -33,7 +33,7 @@ public class Exam {
     Rooms rooms;
 
     @JsonBackReference(value="course")
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="course_id_fk")
     Course course;
 }

@@ -21,12 +21,11 @@ public class CourseController {
     private CourseRepo courseRepo;
 
     @PostMapping("/createCourse")
-    public Map<String, String> createExam(@RequestBody Course course)
+    public Map<String, String> createExam(@RequestBody List<Course> course)
     {
         Map<String, String> response = new HashMap<>();
-        course = courseRepo.saveAndFlush(course);
+        course = courseRepo.saveAllAndFlush(course);
         response.put("Message","Successfully saved");
-        response.put("CourseId",""+course.getId());
         return response;
     }
 

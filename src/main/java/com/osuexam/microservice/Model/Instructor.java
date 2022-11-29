@@ -12,7 +12,7 @@ public class Instructor {
 
     @Id
     @Column
-    private Long instructorId;
+    private String instructorId;
 
     @Column
     private String firstName;

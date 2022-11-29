@@ -48,10 +48,11 @@ public class LoginController {
             }
             response.put("courseList",new ObjectMapper().writeValueAsString(check.getStudent().getCourseList()));
             }
-            else {
-                {response.put("firstName",check.getInstructor().getFirstName());
-                    response.put("lastName",check.getInstructor().getLastName());}
-            }
+            else{
+                response.put("firstName",check.getInstructor().getFirstName());
+                response.put("lastName",check.getInstructor().getLastName());
+                response.put("courseList",new ObjectMapper().writeValueAsString(check.getInstructor().getCourseList()));
+                }
         }else {
             response.put("Message","Failed to login.");
         }
